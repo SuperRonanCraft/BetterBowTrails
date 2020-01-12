@@ -1,0 +1,71 @@
+# BetterBowTrails plugin by SuperRonanCraft! (Join my Public Server mc.RonanCraft.net) #
+# Please give me credit, I'm a first time coder, and would love to see more discussions on my Spigot page! #
+
+Settings:
+  ##Setting this to false will completely disable the economy and the menu file! Only use this if you have another gui
+  ##plugin you wish to use! Or if you wish to only have the plugin command based!
+  UseGUI: true
+  ##Amount of ticks a particle should be delayed from the previous particle (1-20 ticks) '1' for smoothest trail!
+  TickDelay: 1
+  ##Worlds to disable plugin from functioning, set to "[]" to disable world checking!
+  DisabledWorlds:
+  - 'world_nether'
+  - 'world_the_end'
+  ##Max amount of arrows with particles linked to them. Set to '-1' to disable (Useful for large servers!)
+  MaxGlobalTrails: 1028
+  DisableUpdater: false
+
+Player:
+  ##Max amount of arrows per player with trails. Set to '-1' to disable
+  MaxTrails: 8
+  Donator:
+    ##Max amount of arrows per player with the permission "betterbowtrails.donator". Set to '-1' to disable
+    MaxTrails: 16
+  
+Defaults:
+  ## If changed, and you want all players to be affected, you must DELETE all of the files in the "data" folder!
+  ## The DEFAULT particle arrow trail for all players! (Set to "null" to not have a default trail)
+  ParticleTrail: 'redstone_block'
+  ParticleName: '&c&lRedstone Block'
+  ## If changed, you must DELETE all of the "data" folder if you want all players to be affected!
+  ## If false, all arrows by a player will only have particles while in flight by default
+  ## If true, all arrows by a player have particles until the arrow despawns or is picked up by default
+  tillDespawn: false
+  ## How many particles to show per minecraft tick by DEFAULT (20 ticks per second) 5 is recommended!
+  ## Players will be given the choice to lower this if they choose, but never go higher than this value, or lower than 1!
+  ParticlesPerTick: 5
+  ## Set if the arrow during flight mode will have an explosion effect when it hits the ground
+  Explosion: true
+  
+Economy:
+  ## Must have "Vault" installed to use Economy, these will auto disable if vault isn't installed!
+  Enabled: false
+  BoughtTrailsEnabled: true
+  Default:
+    Enabled: true
+    Price: 30
+  Lore:
+  - ''
+  - '&7Right-Click to Buy!'
+  - '&cPrice&7: &a$%price%'
+  Confirm:
+    Enabled: true
+    Title: '&lBetterBowTrails | Buy'
+    Rows: 3
+    Accept:
+      Name: '&a&lConfirm'
+      Item: 'wool:5'
+      Slot: 12
+      Lore:
+      - ''
+      - '&7Click to confirm purchase'
+      - '&7of %particle% or %particleName%'
+      - ''
+      - '&cPrice&7: &a$%price%'
+    Deny:
+      Name: '&c&lCancel'
+      Item: 'wool:14'
+      Slot: 14
+      Lore:
+      - ''
+      - '&7Click to cancel transaction'

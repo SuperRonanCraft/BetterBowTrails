@@ -1,0 +1,82 @@
+main: Main
+version: 2.0.3
+name: BetterBowTrails
+softdepend: [PlaceholderAPI, Vault]
+
+permissions:
+    betterbowtrails.*:
+        children:
+            betterbowtrails.reload: true
+            betterbowtrails.set: true
+            betterbowtrails.amount: true
+            betterbowtrails.type: true
+            betterbowtrails.remove: true
+            betterbowtrails.donator: true
+            betterbowtrails.explosion: true
+            betterbowtrails.all.menu: true
+            betterbowtrails.updater: true
+    betterbowtrails.user.commands:
+        children:
+            betterbowtrails.use: true
+            betterbowtrails.amount: true
+            betterbowtrails.type: true
+            betterbowtrails.remove: true
+            betterbowtrails.explosion: true
+    betterbowtrails.user.menu:
+        children:
+            betterbowtrails.use: true
+            betterbowtrails.use.menu: true
+            betterbowtrails.amount.menu: true
+            betterbowtrails.type.menu: true
+            betterbowtrails.remove.menu: true
+            betterbowtrails.explosion.menu: true
+    betterbowtrails.use:
+        description: use plugin
+        default: op
+    betterbowtrails.use.menu:
+        description: use menu
+        default: op
+    betterbowtrails.set:
+        description: set any particle
+        default: op
+    betterbowtrails.amount:
+        description: change particles per tick
+        default: op
+    betterbowtrails.amount.menu:
+        description: change particles per tick from menu
+        default: op
+    betterbowtrails.type:
+        description: toggle particles type
+        default: op
+    betterbowtrails.type.menu:
+        description: toggle particles type from menu
+        default: op
+    betterbowtrails.remove:
+        description: remove particles
+        default: op
+    betterbowtrails.remove.menu:
+        description: remove particles from menu
+        default: op
+    betterbowtrails.explosion:
+        description: toggle explosions
+        default: op
+    betterbowtrails.explosion.menu:
+        description: toggle explosions from menu
+        default: op
+    betterbowtrails.menu.all:
+        description: equip all particles in the GUI
+        default: op
+    betterbowtrails.donator:
+        description: use more arrows with particles signified in the config
+        default: op
+    betterbowtrails.reload:
+        description: reload plugin
+        default: op
+    betterbowtrails.updater:
+        description: receive a message if the plugin has a new version available!
+        default: op
+
+commands:
+    betterbowtrails:
+        aliases: [arrow, bowtrails, bbt]
+        description: Main command
