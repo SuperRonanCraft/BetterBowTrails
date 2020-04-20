@@ -1,7 +1,8 @@
-main: Main
+main: me.SuperRonanCraft.BetterBowTrails.Main
 version: 2.0.3
 name: BetterBowTrails
 softdepend: [PlaceholderAPI, Vault]
+#api-version: 1.12
 
 permissions:
     betterbowtrails.*:
