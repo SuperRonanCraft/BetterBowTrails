@@ -6,10 +6,13 @@ import java.util.List;
 import me.SuperRonanCraft.BetterBowTrails.event.Commands;
 import me.SuperRonanCraft.BetterBowTrails.event.player.events.Listeners;
 import me.SuperRonanCraft.BetterBowTrails.event.player.files.Files;
+import me.SuperRonanCraft.BetterBowTrails.inventories.Menu;
 import me.SuperRonanCraft.BetterBowTrails.references.Econ;
 import me.SuperRonanCraft.BetterBowTrails.references.Permissions;
 import me.SuperRonanCraft.BetterBowTrails.references.items.Placeholders;
+import me.SuperRonanCraft.BetterBowTrails.references.text.CustomPH;
 import me.SuperRonanCraft.BetterBowTrails.references.text.Messages;
+import me.SuperRonanCraft.BetterBowTrails.references.web.Metrics;
 import me.SuperRonanCraft.BetterBowTrails.references.web.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -17,10 +20,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import me.SuperRonanCraft.BetterBowTrails.inventories.Menu;
-import me.SuperRonanCraft.BetterBowTrails.references.text.CustomPH;
-import me.SuperRonanCraft.BetterBowTrails.references.web.Metrics;
 
 public class Main extends JavaPlugin implements Listener {
 
@@ -73,7 +72,7 @@ public class Main extends JavaPlugin implements Listener {
     private void registerDepends() {
         if (!papihooked && Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             papihooked = true;
-            new CustomPH(this).hook();
+            new CustomPH();
         }
         if (Bukkit.getPluginManager().isPluginEnabled("Vault"))
             economy = new Econ(this).registerEconomy();

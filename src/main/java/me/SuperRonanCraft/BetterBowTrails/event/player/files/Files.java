@@ -3,9 +3,12 @@ package me.SuperRonanCraft.BetterBowTrails.event.player.files;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 
 import me.SuperRonanCraft.BetterBowTrails.event.player.events.Click;
+import me.SuperRonanCraft.BetterBowTrails.inventories.Confirm;
+import me.SuperRonanCraft.BetterBowTrails.inventories.Menu;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,8 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import me.SuperRonanCraft.BetterBowTrails.Main;
-import me.SuperRonanCraft.BetterBowTrails.inventories.Confirm;
-import me.SuperRonanCraft.BetterBowTrails.inventories.Menu;
+import org.bukkit.inventory.ItemStack;
 
 public class Files {
     private Main pl;
@@ -209,22 +211,25 @@ public class Files {
         ConfigurationSection parts = null;
         String item = null;
         for (Object menus : Menu.menuList) {
-            if (e.getCurrentItem().getItemMeta().getDisplayName().equals(pl.getText().color(Menu.nameArray.get(menus)).replaceAll("§f", ""))) {
-                parts = pl.menu.getConfigurationSection("Menu." + menus);
-                item = menus.toString();
-                break;
-            }
+            ItemStack item_cur = e.getCurrentItem();
+            if (item_cur != null && item_cur.hasItemMeta())
+                if (Objects.requireNonNull(e.getCurrentItem().getItemMeta()).getDisplayName().replaceAll("§f", "")
+                        .equals(pl.getText().color(Menu.nameArray.get(menus)).replaceAll("§f", ""))) {
+                    parts = pl.menu.getConfigurationSection("Menu." + menus);
+                    item = menus.toString();
+                    break;
+                }
         }
         boolean boughten = getBought(item, player);
         boolean permToEquip = false;
-        if (parts.getString("Permission") != null && !boughten) {
-            if (player.hasPermission(parts.getString("Permission")))
+        if (parts != null && parts.getString("Permission") != null && !boughten) {
+            if (player.hasPermission(Objects.requireNonNull(parts.getString("Permission"))))
                 permToEquip = true;
         } else if (boughten || pl.getPerms().getMenuAll(player))
             permToEquip = true;
         if (e.isRightClick() && !boughten && pl.getEconomy() != null && Menu.economy && !permToEquip) {
             int price = pl.getConfig().getInt("Economy.Default.Price");
-            if (parts.getInt("Price") != 0)
+            if (parts != null && parts.getInt("Price") != 0)
                 price = parts.getInt("Price");
             else if (!pl.getConfig().getBoolean("Economy.Default.Enabled"))
                 return;
@@ -236,7 +241,7 @@ public class Files {
                 setConfirm(player);
             return;
         }
-        if (permToEquip) {
+        if (parts != null && permToEquip) {
             String particle = parts.getString("ParticleID");
             String name = parts.getString("Name");
             playerData.set("particleID", particle);

@@ -16,11 +16,11 @@ class Particles {
     private Player player;
     private String[] par;
 
-    Particles(Main pl, Player plr, Projectile p) {
+    Particles(Main pl, Player plr, final Projectile p) {
         Files files = pl.files;
         player = plr;
         tillDespawn = files.getType(player);
-        int parCount = files.getAmount(player);
+        final int parCount = files.getAmount(player);
         par = files.getParticleId(player);
         if (files.getExplosion(player))
             explosion = true;

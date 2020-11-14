@@ -1,20 +1,34 @@
 package me.SuperRonanCraft.BetterBowTrails.references.text;
 
 import me.SuperRonanCraft.BetterBowTrails.Main;
-import me.clip.placeholderapi.external.EZPlaceholderHook;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public class CustomPH extends EZPlaceholderHook {
+public class CustomPH extends PlaceholderExpansion {
 
-    private Main pl;
-
-    public CustomPH(Main pl) {
-        super(pl, "betterbowtrails");
-        this.pl = pl;
+    public boolean canRegister() {
+        return true;
     }
 
     @Override
-    public String onPlaceholderRequest(Player p, String id) {
+    public String getIdentifier(){
+        return getpl().getDescription().getName();
+    }
+
+    @Override
+    public String getVersion(){
+        return getpl().getDescription().getVersion();
+    }
+
+    @Override
+    public String getAuthor(){
+        return getpl().getDescription().getAuthors().get(0);
+    }
+
+    @Override
+    public String onRequest(OfflinePlayer op, String id) {
+        Player p = op.getPlayer();
         if (id.equals("amount"))
             return String.valueOf(getParAmount(p));
         if (id.equals("type"))
@@ -27,29 +41,33 @@ public class CustomPH extends EZPlaceholderHook {
     }
 
     private int getParAmount(Player player) {
-        return pl.files.getAmount(player);
+        return getpl().files.getAmount(player);
     }
 
     private String getType(Player player) {
-        boolean typeBoolean = pl.files.getType(player);
-        String type = pl.getText().color(pl.menu.getString("Settings.ToggleTrailType.Current.Flight"));
+        boolean typeBoolean = getpl().files.getType(player);
+        String type = getpl().getText().color(getpl().menu.getString("Settings.ToggleTrailType.Current.Flight"));
         if (typeBoolean)
-            type = pl.getText().color(pl.menu.getString("Settings.ToggleTrailType.Current.Despawn"));
+            type = getpl().getText().color(getpl().menu.getString("Settings.ToggleTrailType.Current.Despawn"));
         return type;
     }
 
     private String getParticle(Player player) {
-        String par = pl.files.getParticleName(player);
+        String par = getpl().files.getParticleName(player);
         if (par.equals("null"))
             par = "None";
-        return pl.getText().strip(par);
+        return getpl().getText().strip(par);
     }
 
     private String getExplosion(Player player) {
-        boolean typeBoolean = pl.files.getExplosion(player);
-        String type = pl.getText().color(pl.menu.getString("Settings.Explosion.Current.Disabled"));
+        boolean typeBoolean = getpl().files.getExplosion(player);
+        String type = getpl().getText().color(getpl().menu.getString("Settings.Explosion.Current.Disabled"));
         if (typeBoolean)
-            type = pl.getText().color(pl.menu.getString("Settings.Explosion.Current.Enabled"));
+            type = getpl().getText().color(getpl().menu.getString("Settings.Explosion.Current.Enabled"));
         return type;
+    }
+
+    private Main getpl() {
+        return Main.getInstance();
     }
 }

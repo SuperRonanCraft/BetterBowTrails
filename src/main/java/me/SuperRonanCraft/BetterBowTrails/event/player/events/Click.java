@@ -1,7 +1,7 @@
 package me.SuperRonanCraft.BetterBowTrails.event.player.events;
 
-import me.SuperRonanCraft.BetterBowTrails.Main;
 import me.SuperRonanCraft.BetterBowTrails.inventories.Menu;
+import me.SuperRonanCraft.BetterBowTrails.Main;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,11 +31,13 @@ public class Click implements Listener {
         e.setCancelled(true);
         Player player = (Player) e.getWhoClicked();
         ItemStack item = e.getCurrentItem();
+        assert item != null;
         String itemName = item.getItemMeta().getDisplayName();
         if (settings == null)
             settings = pl.menu.getConfigurationSection("Settings");
         // Clicked NextPage
         if (type.get(player).equals("Menu")) {
+            //System.out.println(e.getSlot() + " " + Menu.explosionPos);
             if (item.equals(pl.getPhd().getNext(player)))
                 clickedNextPage(player);
                 // Clicked LastPage

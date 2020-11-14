@@ -1,6 +1,7 @@
 main: me.SuperRonanCraft.BetterBowTrails.Main
-version: 2.0.3
+version: 2.1.0
 name: BetterBowTrails
+api-version: '1.13'
 softdepend: [PlaceholderAPI, Vault]
 #api-version: 1.12
 
