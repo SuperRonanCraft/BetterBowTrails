@@ -129,22 +129,24 @@ public class Click implements Listener {
     }
 
     private boolean validClick(InventoryClickEvent e) {
-        if (!(e.getWhoClicked() instanceof Player) || e.isCancelled())
+        // Check if a player clicked the inventory
+        if (!(e.getWhoClicked() instanceof Player))
             return false;
-        // Clicks the inventory
+
+        // Check if event was canceled
+        if (e.isCancelled())
+            return false;
+
+        // Check if they clicked a GUI from this plugin
         if (!e.getInventory().equals(invs.get(e.getWhoClicked())))
             return false;
-        // Checks if click is valid
-        try {
-            e.getCurrentItem().getItemMeta().getDisplayName();
-        } catch (NullPointerException ex) {
-            return false;
-        }
-        // Clicks their own inventory
+
+        // Check if they clicked their own inventory
         if (!e.getClickedInventory().equals(invs.get(e.getWhoClicked()))) {
             e.setCancelled(true);
             return false;
         }
+
         return true;
     }
 }
